@@ -5,9 +5,9 @@ var io = require('socket.io')(http);
 var path = require('path');
 
 var commands = [
-	{command: '/setColor', style: 'color: ', commandLen: 9},
-	{command: '/setBold' , style: 'font-weight: bold', commandLen: 8},
-	{command: '/setItalic' , style: 'font-style: italic;', commandLen: 10}
+	{command: '/setColor', style: 'color: '},
+	{command: '/setBold' , style: 'font-weight: bold'},
+	{command: '/setItalic' , style: 'font-style: italic;'}
 ];
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -36,7 +36,7 @@ io.on('connection', function(socket){
 											msg.length : msg.indexOf('/',currCommandIndex + 1);
 
 				style += currCommand.style +
-					     msg.substring(currCommandIndex + currCommand.commandLen, nextCommandIndex) + ';';
+					     msg.substring(currCommandIndex + currCommand.command.length, nextCommandIndex) + ';';
 			}
 		}
 
